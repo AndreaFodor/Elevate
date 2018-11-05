@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Elevate</title>
+		<link rel="stylesheet" href="{{ url_for('static',filename='styles/mainpage.css') }}" />
+     	<link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+
+
+	<body>
+		<script src="{{ url_for('static', filename='main.js') }}"></script>
+
+		<div class="fullscreen">
+
+			<div class="header">
+			<h1>Elevate</h1>
+			</div>
+		</div>
+
+		<div class="semitrans">
+			<h1>Map your commute with Elevate</h1>
+			
+			<p>Enter your starting point and destination and our tool will take elevation into account to route the most fuel efficient path for your trip.</p>
+
+		<div class="container"><br>
+
+		</div>
+
+		<div class=container"><br>
+		<div class="row align-items-center justify-content-center">
+		<div class="col-md-4">
+		  <form  action="" method="post" role="form">
+			{{ form.csrf }}
+			<div class="form-group">
+			  <label for="present-lat">Current Latitude:</label>
+			  <input type="text" class="form-control" id="present-lat" name="present-lat" placeholder="45.501403">
+				<br>
+			  <label for="present-long">Current Longitude:</label>
+			  <input type="text" class="form-control" id="present-long" name="present-long" placeholder="-73.556501">
+			<br>
+		  <label for="dest-lat">Destination Latitude:</label>
+		  <input type="text" class="form-control" id="dest-lat" name="dest-lat" placeholder="45.483073">
+			<br>
+		  <label for="dest-long">Destination Longitude:</label>
+		  <input type="text" class="form-control" id="dest-long" name="dest-long" placeholder="-73.612764">
+		</div>
+			<br>													   
+			<center>
+			  <button type="submit" class="btn btn-success">Submit</button>
+			</center>
+		  </form>
+		  <br>
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+			{% for message in messages %}
+				{% if "Error" not in message[1]: %}
+					<div class="alert alert-info">
+					<strong>Success! </strong> {{ message[1] }}
+					</div>
+				{% endif %}
+				{% if "Error" in message[1]: %}
+					<div class="alert alert-danger">
+					<strong>Error: </strong> {{ message[1] }}
+					</div>
+				{% endif %}
+			{% endfor %}
+				{% endif %}
+			{% endwith %}
+		</div>
+		<br>
+		</div>
+		</div>
+
+			
+			<h2>Result</h2>
+			<iframe width=1400 height=500 src="{{url_for('static', filename='route2.html')}}"></iframe> 
+<!-- 			<img class="floatright" width=650 height=500 src="{{url_for('static', filename='route.png')}}" /> -->
+
+			<p>                 </p>
+
+
+		</div>
+
+		
+	</body>
+
+</html> 
